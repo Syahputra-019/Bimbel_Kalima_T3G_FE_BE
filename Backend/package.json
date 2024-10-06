@@ -5,6 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "api-bimbel": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,8 +13,9 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.3",
+    "express": "^4.21.0",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.17.0"
+    "nodemon": "^3.1.7",
+    "sequelize": "^6.37.4"
   }
 }
