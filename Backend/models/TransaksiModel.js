@@ -3,20 +3,23 @@ import db from "../config/Database.js";
 
 const {DataTypes} = Sequelize;
 
-const Admin = db.define('admin',{
-    id_admin: {
+const Transaksi = db.define('transaksi',{
+    id_transaksi: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
       id_user: Sequelize.INTEGER,
-      jabatan: Sequelize.STRING,
+      jumlah_pembayaran: Sequelize.STRING,
+      metode_pembayarab: Sequelize.STRING,
+      tanggal_transaksi: Sequelize.STRING,
+      status_transaksi: Sequelize.STRING
     });
 ({
     freezeTableName:true
 });
 
-export default Admin;
+export default Transaksi;
 
 (async()=>{
     await db.sync({ alter: true });
