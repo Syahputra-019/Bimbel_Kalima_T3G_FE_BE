@@ -16,7 +16,7 @@ export const getVideoPembelajaranByid_Video = async (req, res) => {
     try {
         const response = await VideoPembelajaran.findOne({
             where: {
-                id_video: req.params.id_Video // Pastikan ini sesuai dengan nama kolom di model
+                id_video: req.params.id_video 
             }
         });
         
@@ -47,7 +47,7 @@ export const updateVideoPembelajaran = async (req, res) => {
     try {
         const [updated] = await VideoPembelajaran.update(req.body, {
             where: {
-                id_video: req.params.id_Video // Pastikan ini sesuai dengan nama kolom di model
+                id_video: req.params.id_video
             }
         });
 
@@ -67,7 +67,7 @@ export const deleteVideoPembelajaran = async (req, res) => {
     try {
         const deleted = await VideoPembelajaran.destroy({
             where: {
-                id_video: req.params.id_Video // Pastikan ini sesuai dengan nama kolom di model
+                id_video: req.params.id_video
             }
         });
 
