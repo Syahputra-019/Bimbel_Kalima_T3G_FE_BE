@@ -1,76 +1,121 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 <template>
   <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <RouterLink class="navbar-brand" to="#">Navbar</RouterLink>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <RouterLink to="/" class="nav-link active" aria-current="page">Home</RouterLink>
-            </li>
-            <li class="nav-item">
-              <RouterLink to="/link" class="nav-link">Video Pembelajaran</RouterLink>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Student
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Battle Student</a></li>
-                <li><a class="dropdown-item" href="#">Modul</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Berlangganan</a>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+    <nav class="navbar">
+      <div class="container">
+        <!-- Logo -->
+        <RouterLink to="/" class="navbar-brand">BELA</RouterLink>
+
+        <!-- Links -->
+        <ul class="nav-links">
+          <li><RouterLink to="/" class="nav-link">Home</RouterLink></li>
+          <li><RouterLink to="/video-pembelajaran" class="nav-link">Video Pembelajaran</RouterLink></li>
+          <li><RouterLink to="/berlangganan" class="nav-link">Berlangganan</RouterLink></li>
+          <li><RouterLink to="/battle-student" class="nav-link">Battle Student</RouterLink></li>
+          <li><RouterLink to="/modul" class="nav-link">Modul</RouterLink></li>
+          <li><RouterLink to="/konsultasi" class="nav-link">Konsultasi</RouterLink></li>
+        </ul>
+
+        <!-- Buttons -->
+        <div class="nav-buttons">
+          <!-- Remove the "Masuk" button -->
+          <RouterLink to="/daftar" class="nav-button signup-button">Daftar</RouterLink>
         </div>
       </div>
     </nav>
   </header>
 
-  <!-- 
-  <nav>
-    <RouterLink to="/" class="text-success">Home</RouterLink>
-    <RouterLink to="/about" class="text-success">About</RouterLink>
-  </nav>
-  -->
-
   <RouterView />
 </template>
 
-<style scoped>
+<script>
+import { ref } from 'vue';
 
+export default {
+  setup() {
+    const dropdownOpen = ref(false);
+    const toggleDropdown = () => {
+      dropdownOpen.value = !dropdownOpen.value;
+    };
+
+    return { dropdownOpen, toggleDropdown };
+  },
+};
+</script>
+
+<style scoped>
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px; /* Reduce padding */
+  background-color: #343a40;
+  color: white;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 10px; /* Reduce gap */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.nav-link {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem; /* Font size adjustment */
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-button {
+  padding: 8px 12px; /* Adjust padding */
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button {
+  background-color: #28a745;
+}
+
+.nav-button:hover {
+  opacity: 0.8;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+}
 </style>

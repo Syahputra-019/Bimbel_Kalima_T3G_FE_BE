@@ -8,33 +8,20 @@
       <section class="features">
         <h2>Gebyar Promo</h2>
         <div class="card-container">
-          <div class="card" @mouseover="hoverCard" @mouseleave="leaveCard">
-            <img src="@/assets/WhatsAppImage_2024-10-14.jpeg" alt="Feature 1" />
+          <!-- Router link added around each card -->
+          <router-link to="/berlangganan" class="card" @mouseover="hoverCard" @mouseleave="leaveCard">
+            <img src="@/assets/WhatsAppImage_2024-10-13.jpeg" alt="Feature 1" />
             <div class="card-content">
-              <h3 class="small-text">Paket Hemat: Rp. 30.000</h3>
+              <h3 class="small-text">Paket Premium: Rp. 50.000</h3>
               <p>Video Pembelajaran</p>
             </div>
-          </div>
-          <div class="card" @mouseover="hoverCard" @mouseleave="leaveCard">
-            <img src="@/assets/WhatsAppImage_2024-10-13.jpeg" alt="Feature 2" />
-            <div class="card-content">
-              <h3 class="small-text">Paket Komplit</h3>
-              <p>Video Pembelajaran + Konsultasi</p>
-            </div>
-          </div>
-          <div class="card" @mouseover="hoverCard" @mouseleave="leaveCard">
-            <img src="https://i.pinimg.com/564x/c8/45/a8/c845a86269dfc68ea532439729b534fb.jpg" alt="Feature 3" />
-            <div class="card-content">
-              <h3 class="small-text">Paket Ekslusif</h3>
-              <p>Nikmati Semua Layanan Selama Setahun.</p>
-            </div>
-          </div>
+          </router-link>
         </div>
       </section>
       <section class="cta">
         <h2>Ayo Mulai</h2>
         <p>Tonton Video Sebanyak Mungkin Untuk Mengukir Prestasi!</p>
-        <router-link to="/your-link" class="download-button">Get Started</router-link> <!-- Changed from Download Now to Get Started -->
+        <router-link to="/video-pembelajaran" class="download-button">Get Started</router-link>
       </section>
     </main>
     <footer>
@@ -93,6 +80,8 @@ header {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .card:hover {
