@@ -16,8 +16,8 @@
     <!-- Manual login section -->
     <div class="manual-login-section">
       <h2>Login with Email</h2>
-      <input v-model="email" type="email" placeholder="Enter your email" class="login-input" />
-      <input v-model="password" type="password" placeholder="Enter your password" class="login-input" />
+      <input id="login-email" v-model="email" type="email" placeholder="Enter your email" class="login-input" />
+      <input id="login-password" v-model="password" type="password" placeholder="Enter your password" class="login-input" />
       <button @click="loginWithEmail" class="login-button">Login</button>
     </div>
   </div>
@@ -26,6 +26,7 @@
 <script>
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import axios from 'axios';
 
 export default {
   setup() {
@@ -48,11 +49,24 @@ export default {
       completeLogin();
     };
 
-    const loginWithEmail = () => {
+    const loginWithEmail = async () => {
       if (email.value && password.value) {
-        completeLogin();
+        try {
+          const response = await axios.post('http://localhost:5000/loginemail', {
+            email: email.value,
+            password: password.value,
+          });
+
+          if (response.status === 200) {
+            alert('Login berhasil!');
+            completeLogin();
+          }
+        } catch (error) {
+          console.error('Login error:', error);
+          alert('Login gagal. Silakan coba lagi.');
+        }
       } else {
-        alert('Please enter both email and password.');
+        alert('Silakan masukkan email dan kata sandi.');
       }
     };
 

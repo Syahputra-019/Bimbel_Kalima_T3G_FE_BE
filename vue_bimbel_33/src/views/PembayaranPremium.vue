@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- Payment Details Section in a Card -->
     <div class="card payment-details">
       <h3>Detail Pembayaran</h3>
       <div class="item">
@@ -14,8 +13,6 @@
         </p>
       </div>
     </div>
-
-    <!-- Total Price Section in a Card -->
     <div class="card total">
       <h3>Total Harga</h3>
       <span>Rp {{ totalAmount.toLocaleString('id-ID') }}</span>
@@ -26,18 +23,26 @@
 
 <script>
 import { ref, computed } from 'vue';
+import axios from 'axios';
 
 export default {
   name: 'PembayaranDasar',
   setup() {
-    const itemPrice = ref(50000); // Set item price
-
-    // Calculate total amount based on item price
+    const itemPrice = ref(50000);
     const totalAmount = computed(() => itemPrice.value);
 
-    // Handle payment method selection
-    const selectPaymentMethod = () => {
-      alert('Selamat Pembayaran Sukses!');
+    const selectPaymentMethod = async () => {
+      try {
+        const response = await axios.post('http://localhost:3000/transaksi', {
+          amount: totalAmount.value,
+        });
+        if (response.status === 201) {
+          alert('Selamat Pembayaran Sukses!');
+        }
+      } catch (error) {
+        console.error('Error creating transaction:', error);
+        alert('Terjadi kesalahan saat melakukan pembayaran.');
+      }
     };
 
     return {
@@ -50,45 +55,46 @@ export default {
 </script>
 
 <style scoped>
+/* Your existing styles */
 .container {
   display: flex;
-  flex-direction: column;
-  width: 350px;
+  justify-content: space-between;
   padding: 20px;
 }
 
 .card {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
+  padding: 15px;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 45%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.payment-details .item,
-.total .item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.payment-details h3,
+.total h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
+.item,
 .notes {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #666;
+  margin-bottom: 15px;
 }
 
 .payment-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
+  display: block;
   width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
 }
 
 .payment-button:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
 }
 </style>
